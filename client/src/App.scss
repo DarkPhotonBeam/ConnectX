@@ -1,0 +1,371 @@
+$backgroundColor: #000;
+$primaryColor: #3d63b1;
+
+$player1Color: $primaryColor;
+$player2Color: #b63d3d;
+$player3Color: #3caa56;
+$player4Color: #bdb73b;
+$player5Color: #7838c4;
+$player6Color: #b65634;
+$player7Color: #93a874;
+$player8Color: #48b49e;
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  background: $backgroundColor;
+  color: #fff;
+  overflow: hidden;
+}
+
+.PlayerList {
+  list-style: none;
+  text-transform: uppercase;
+  opacity: 1;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1rem;
+
+  &__player {
+    &.awaitingMove {
+      font-weight: 600;
+
+      .PlayerList__playerColor {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__playerColor {
+    width: 1em;
+    height: 1em;
+    margin-right: .5rem;
+    opacity: .75;
+
+    &.player-1 {
+      background-color: $player1Color;
+    }
+
+    &.player-2 {
+      background-color: $player2Color;
+    }
+
+    &.player-3 {
+      background-color: $player3Color;
+    }
+
+    &.player-4 {
+      background-color: $player4Color;
+    }
+
+    &.player-5 {
+      background-color: $player5Color;
+    }
+
+    &.player-6 {
+      background-color: $player6Color;
+    }
+
+    &.player-7 {
+      background-color: $player7Color;
+    }
+
+    &.player-8 {
+      background-color: $player8Color;
+    }
+  }
+
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: .5rem;
+    color: #ccc;
+  }
+
+  .fas {
+    font-size: .5em;
+    margin-left: .5rem;
+  }
+}
+
+.Lobby {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    margin-bottom: 3rem;
+  }
+
+  &__playerCount {
+    font-weight: 300;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #ccc;
+    margin-bottom: 3rem;
+    letter-spacing: 2px;
+  }
+}
+
+.Logo {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  font-style: italic;
+  font-size: 2rem;
+  color: #fff;
+  letter-spacing: -3px;
+
+  opacity: .5;
+
+  &__4 {
+    color: $primaryColor;
+    padding-left: 2px;
+    font-size: 1.25em;
+  }
+}
+
+
+$tileSize: 6rem;
+$cutoutPercentage: 1;
+
+.RegistrationForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__label {
+    margin-bottom: 6rem;
+  }
+
+  &__input {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    color: #ccc;
+    width: 20rem;
+    font-size: 2rem;
+    text-align: center;
+    padding: .5rem;
+    transition: all 150ms ease-in-out;
+    margin-bottom: 6rem;
+    font-weight: 300;
+
+    &:focus {
+      border-color: $primaryColor;
+    }
+  }
+
+  &__submit {
+    margin-bottom: 6rem;
+  }
+
+  &__error {
+    font-size: 2rem;
+    text-transform: uppercase;
+    animation: letterSpacing 2s ease-in-out;
+    letter-spacing: 8px;
+    color: #d71b1b;
+  }
+}
+
+.TurnInfo {
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+$borderColor: #ccc;
+
+.Board {
+
+  //transform: ;
+  margin-bottom: 2rem;
+
+  &.gameover {
+    animation: rotate3D 2s ease-in-out 500ms;
+  }
+  &__row {
+    display: flex;
+
+    &:last-child {
+      border-bottom: 1px solid $borderColor;
+    }
+  }
+
+}
+
+@keyframes rotate3D {
+  from {
+    transform: perspective(300em) rotateY(0deg);
+  }
+
+  to {
+    transform: perspective(300em) rotateY(360deg);
+  }
+}
+
+.Tile {
+  height: $tileSize;
+  width: $tileSize;
+  //background-color: #2f3544;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid $borderColor;
+  border-left: 1px solid $borderColor;
+
+  &:last-child {
+    .Tile__cutout {
+      border-right: 1px solid $borderColor;
+    }
+  }
+
+  &__cutout {
+    color: #fff;
+    background-color: $backgroundColor;
+    height: 100%;
+    width: 100%;
+    //border-radius: 50%;
+    transition: all 150ms ease-in-out;
+    position: relative;
+
+    &:hover {
+      background-color: #222;
+      cursor: pointer;
+    }
+  }
+
+  &__token {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: fallAnimation 500ms ease-in-out;
+
+    &.occupied-by-1 {
+      background-color: $player1Color;
+    }
+
+    &.occupied-by-2 {
+      background-color: $player2Color;
+    }
+
+    &.occupied-by-3 {
+      background-color: $player3Color;
+    }
+
+    &.occupied-by-4 {
+      background-color: $player4Color;
+    }
+
+    &.occupied-by-5 {
+      background-color: $player5Color;
+    }
+
+    &.occupied-by-6 {
+      background-color: $player6Color;
+    }
+
+    &.occupied-by-7 {
+      background-color: $player7Color;
+    }
+
+    &.occupied-by-8 {
+      background-color: $player8Color;
+    }
+
+    &.highlighted {
+      //opacity: .75;
+      //transform-origin: center;
+      //transform: scale(1.25);
+      animation: pulsate 1s ease-in-out 500ms infinite, fallAnimation 500ms ease-in-out;
+    }
+  }
+}
+
+@keyframes fallAnimation {
+  from {
+    bottom: 400%;
+  }
+
+  to {
+    bottom: 0;
+  }
+}
+
+@keyframes highlight {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: .75;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes letterSpacing {
+  from {
+    letter-spacing: 1px;
+  }
+
+  to {
+    letter-spacing: 8px;
+  }
+}
+
+.player-color-1 {
+  color: $player1Color;
+}
+
+.player-color-2 {
+  color: $player2Color;
+}
+
+.player-color-3 {
+  color: $player3Color;
+}
+
+.player-color-4 {
+  color: $player4Color;
+}
+
+.player-color-5 {
+  color: $player5Color;
+}
+
+.player-color-6 {
+  color: $player6Color;
+}
+
+.player-color-7 {
+  color: $player7Color;
+}
+
+.player-color-8 {
+  color: $player8Color;
+}
